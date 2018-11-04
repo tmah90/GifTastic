@@ -5,44 +5,39 @@ function createButtons(){
     $('#buttonOriginal').empty(); //avoiding duplicates 
 //looping thru shows 
 for (var i=0; i<disney.length; i++){
-    var button= $('<button>');
-    button.html(disney[i]);
-    button.addClass('btn btn-outline-secondary');
-    button.attr('data-disney',disney[i]);
-    $("buttonOriginal").append(button);
+    var d= $('<button>');
+    d.text(disney[i]);
+    d.addClass('btn btn-outline-secondary');
+    d.attr('data-disney',disney[i]);
+    // d.attr("id","disneybtn");
+    $("buttonOriginal").append(d);
     }
 }
-//addDisney button 
-$('#addDisney').on('click',function(event){
-    event.preventDefault();
-  var DisneyNew =$("#disney-Input").val().trim();
-  disney.push(DisneyNew);
-  createButtons();
-  return false;
-});
 //display gifs
 function showGifs(){
     var disney=$(this).attr("data-disney");
     //console.log(disney); it worked!
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        disney + "&api_key=dc6zaTOxFJmzC&limit=10";
-
-    // var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + disney + "&api_key=VMdp7LyrDEY0uYvsr3Wth3EJBynw4fw7&limit=10&tag=disney";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + disney + "&limit=10&api_key=VMdp7LyrDEY0uYvsr3Wth3EJBynw4fw7";
 //AJAX GET 
 $.ajax({
     url: queryURL,
-    method: "GET"
-  })
-  .then(function(response){
+    method: "GET"})
+  .done(function(response){
     //   console.log(response.data);
-      var results= response.data.image_original_url;
-      for(var i=0; i<results.length; i++){
-    var gifDiv =$('<div class=gifs>');
+      var results= response.data;
+      for(var i=0; i < results.length; i++){
+    var gifDiv =$('<div class= gifs>');
+    var rating= response[i].rating;
+
+    var p=$("<p>").html("Rating:"+ rating);
+    p.addClass("text-center");
+
     var gifImgs =$('<img>');
-    var rating= results[i].rating;
-    gifImgs.attr("src", results[i].images.fixed_height.url);
-    gifImgs.attr('title','Rating:'+ rating);
+    gifImgs.addClass("gifs)");
+    gifImgs.attr("src", response[i].images.fixed_height.url);
+    // gifImgs.attr('title','Rating:'+ rating);
     gifImgs.attr('data-still', response[i].images.fixed_height.url);
+    gifImgs.attr("data-animate", response[i].images.fixed_height.url);
     gifImgs.attr('data-state',"still");
 
     gifDiv.append(p);
@@ -50,8 +45,31 @@ $.ajax({
 
     $('#disneyContainer').prepend(gifDiv);
 
+    //addDisney button 
+$('#addDisney').on('click',function(event){
+    event.preventDefault();
+  var DisneyNew =$("#disneyInput").val().trim();
+  disney.push(DisneyNew);
+  $("disneyInput").val("");
+  createButtons();
+  console.log(disney;)
+});
+
     // function for displaying show gifs
-    $(document).on("click", ".disney", showGifs);
+    $(document).on("click", "#disneybtn", showGifs);
+
+    $(document).on("click", ".gifs", function() {
+        var state = $(this).attr("data-state");
+    
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        } else {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    });
+    
   }
   });
   createButtons();
