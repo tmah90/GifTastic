@@ -6,16 +6,18 @@ function createButtons(){
 //looping thru shows 
 for (var i=0; i<disney.length; i++){
     var button=$('<button>');
-    button.addClass('disneyshows');
-    button.attr('date-name',disney[i]);
+    button.html(disney[i]);
+    button.addClass('btn btn-outline-secondary');
+    button.attr('data-name',disney[i]);
     button.text(disney[i]);
     $("buttonOriginal").append(button);
     }
 }
 //addDisney button 
-$('#addDisney').on('click',function(){
-  var DisneyNew =$("#disney-input").val().trim();
-  disneyShows.push(DisneyNew);
+$('#addDisney').on('click',function(event){
+    event.preventDefault();
+  var DisneyNew =$("#disney-Input").val().trim();
+  disney.push(DisneyNew);
   createButtons();
 });
 //display gifs
@@ -44,6 +46,10 @@ $.ajax({
     gifDiv.prepend(gifImgs);
 
     $('#disneyContainer').prepend(gifDiv);
+
+    // function for displaying show gifs
+    $(document).on("click", ".disney", showGifs);
+
       }
   }
   )
