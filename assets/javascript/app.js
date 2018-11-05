@@ -15,9 +15,9 @@ for (var i=0; i<disney.length; i++){
 }
 //display gifs
 function showGifs(){
-    var disney=$(this).attr("data-disney");
-    //console.log(disney); it worked!
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + disney + "&limit=10&api_key=VMdp7LyrDEY0uYvsr3Wth3EJBynw4fw7";
+    var disneymovies= $(this).attr("data-disney");
+    console.log(disneymovies);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + disneymovies + "&limit=10&api_key=VMdp7LyrDEY0uYvsr3Wth3EJBynw4fw7";
 //AJAX GET 
 $.ajax({
     url: queryURL,
@@ -33,7 +33,7 @@ $.ajax({
     p.addClass("text-center");
 
     var gifImgs =$('<img>');
-    gifImgs.addClass("gifs)");
+    gifImgs.addClass("gif)");
     gifImgs.attr("src", response[i].images.fixed_height.url);
     // gifImgs.attr('title','Rating:'+ rating);
     gifImgs.attr('data-still', response[i].images.fixed_height.url);
