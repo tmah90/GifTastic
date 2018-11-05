@@ -1,0 +1,21 @@
+h1{
+    font-family: cursive;
+    font-size: 200;
+    font-style: italic;
+    color: whitesmoke; 
+}
+
+p{
+    font-style: oblique;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.btn {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header {
+	background-image: url("https://cdn.shopify.com/s/files/1/1614/2659/collections/Disney_Banner_1600x.jpg?v=1495248247");
+	background-size: 100% 100%;
+	color: white;

@@ -52,7 +52,7 @@ $('#addDisney').on('click',function(event){
   disney.push(DisneyNew);
   $("disneyInput").val("");
   createButtons();
-  console.log(disney;)
+  console.log(disney);
 });
 
     // function for displaying show gifs
